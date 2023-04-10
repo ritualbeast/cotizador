@@ -7,7 +7,7 @@ import  {useCotizador} from "../hooks/useCotizador"
 import Error from "./Error"
 
 const Formulario = () => {
-    const {datos, handleChangeDatos, error, setError} = useCotizador()
+    const {datos, handleChangeDatos, error, setError, cotizarSeguro} = useCotizador()
     const handleSubtmit = e => {
         e.preventDefault()
         if (Object.values(datos).includes('')) {
@@ -15,6 +15,7 @@ const Formulario = () => {
             return;
         }
         setError(false)
+        cotizarSeguro()
     };
     
     return (
@@ -33,12 +34,14 @@ const Formulario = () => {
                     name="marca" id="marca" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline p-20"
                      value={datos.marca}
                     > 
+                    <option value="">-- Seleccione --</option>
                     {MARCAS.map(marca => (
                         <option
                             key={marca.id}
                             value={marca.id}
                             
                         >
+                            
                             {marca.nombre}
 
                         </option>
@@ -52,7 +55,7 @@ const Formulario = () => {
                 onChange={ e => handleChangeDatos(e)}
                 value={datos.anios}
                 name="anios" id="anios" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline p-20"> 
-                 
+                    <option value="">-- Seleccione --</option>
                     {ANIOS.map(anios => (
                         <option
                             key={anios}
